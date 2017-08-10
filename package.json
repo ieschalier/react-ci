@@ -1,0 +1,47 @@
+{
+  "engines": {
+    "node": "8"
+  },
+  "name": "react-ci",
+  "version": "0.0.3",
+  "description": "CI/CD for your React applications",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "node --harmony node_modules/.bin/micro -p $PORT",
+    "dev": "node --harmony node_modules/.bin/micro-dev"
+  },
+  "bin": {
+    "react-ci": "./bin/react-ci.js"
+  },
+  "author": "Didier Franc",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.104.0",
+    "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
+    "glob": "^7.1.2",
+    "jsonwebtoken": "^7.4.3",
+    "lodash": "^4.17.4",
+    "micro": "^8.0.3",
+    "mime": "^1.3.6",
+    "node-forge": "^0.7.1",
+    "redis": "^2.8.0",
+    "shelljs": "^0.7.8"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0",
+    "micro-dev": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didierfranc/react-ci.git"
+  },
+  "bugs": {
+    "url": "https://github.com/didierfranc/react-ci/issues"
+  },
+  "homepage": "https://github.com/didierfranc/react-ci#readme"
+}
