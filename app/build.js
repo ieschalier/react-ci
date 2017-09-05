@@ -1,6 +1,13 @@
 const { exec, cd } = require('shelljs')
 const { getToken, status } = require('./github')
+const fs = require('fs')
 const s3 = require('./plugins/s3')
+const surge = require('./plugins/surge')
+
+const builds = {
+  s3: repo => s3(repo),
+  surge: repo => surge(repo),
+}
 
 module.exports = async body => {
   const {
@@ -18,7 +25,15 @@ module.exports = async body => {
   cd(`builds/${commit}`)
   await exec('yarn && yarn test', async code => {
     if (code === 0) {
-      exec('yarn build', s3(repo))
+      exec('yarn build', () => {
+        const ci = JSON.parse(fs.readFileSync('ci.json', 'utf8'))
+        const { plugins } = ci
+
+        Object.keys(plugins).forEach(plugin => {
+          if (builds[plugin]) builds[plugin](repo)
+        })
+      })
+
       await setState('success')
     } else await setState('error')
   })
